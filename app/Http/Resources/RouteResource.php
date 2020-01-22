@@ -9,13 +9,17 @@ class RouteResource extends JsonResource
 {
     public function toArray($request)
     {
-        /** @var Route $this */
+        /** @var Route|self $this */
         return [
-            'title' => $this->title,
-            'color' => $this->color,
+            'id'     => $this->id,
+            'title'  => $this->title,
+            'color'  => $this->color,
             'easier' => $this->easier,
-            'grade' => new GradeResource($this->grade),
+            'grade'  => new GradeResource($this->grade),
             'author' => new AuthorResource($this->author),
+            'attempts' => $this->whenLoaded('attempts', function() {
+                return AttemptResource::collection($this->attempts);
+            })
         ];
     }
 }

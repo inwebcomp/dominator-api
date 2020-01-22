@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function routes()
+    {
+        return $this->hasMany(Route::class, 'author_id');
+    }
+
+    public function attempts()
+    {
+        return $this->hasMany(Attempt::class);
+    }
 }

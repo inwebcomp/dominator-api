@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             GradeSeeder::class,
             RouteSeeder::class,
+            AttemptSeeder::class,
         ]);
     }
 }

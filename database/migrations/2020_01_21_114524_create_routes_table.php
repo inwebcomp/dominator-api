@@ -14,7 +14,7 @@ class CreateRoutesTable extends Migration
     public function up()
     {
         Schema::create('routes', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->unsignedInteger('group_id')->nullable();
             $table->string('title');
             $table->unsignedInteger('grade_id')->nullable();
@@ -22,8 +22,12 @@ class CreateRoutesTable extends Migration
             $table->boolean('easier');
             $table->string('color', 7);
             $table->text('marks')->nullable();
-
             $table->timestamps();
+        });
+
+        Schema::table('routes', function (Blueprint $table) {
+            $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade');
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

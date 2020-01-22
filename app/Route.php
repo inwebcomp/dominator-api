@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean easier
  * @property string  color
  * @property array   marks
+ * @property Attempt[] attempts
  */
 class Route extends Model
 {
@@ -30,5 +31,10 @@ class Route extends Model
     public function author()
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function attempts()
+    {
+        return $this->hasMany(Attempt::class);
     }
 }
